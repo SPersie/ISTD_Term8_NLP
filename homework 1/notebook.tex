@@ -1,0 +1,1165 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{homework 1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{natural-language-processing-summer-2019-homework-1}{%
+\section{50.040 Natural Language Processing (Summer 2019) Homework
+1}\label{natural-language-processing-summer-2019-homework-1}}
+
+    \textbf{Write your student ID(s) and name(s)}
+
+ID: 1002189
+
+Name: Li Xingxuan
+
+Students with whom you have discussed (if any):
+
+    \hypertarget{introduction}{%
+\subsubsection{Introduction}\label{introduction}}
+
+Word embeddings are dense vectors that represent words, and capable of
+capturing semantic and syntactic similarity, relation with other words,
+etc. Word2Vec is one of the most popular techniques to learn word
+embeddings using shallow neural networks. It was developed by Tomas
+Mikolov in 2013 at Google. Generally, there are two methods to evaluate
+the quality of word embeddings. One is intrinsic evaluation, and the
+other is extrinsic evaluation. In intrinsic evaluation, the similarities
+between words are explored whereas in extrinsic evaluation, downstream
+tasks are executed based on word embeddings.
+
+In order to finish the following tasks, you need to
+\href{http://mattmahoney.net/dc/text8.zip}{download} the text8 dataset
+and put it under the ``data'' folder. The text8 dataset consists of one
+single line of long text. Please do not change the data unless you are
+requested to do so.
+
+Environment: - Python 3.5 or above - gensim package - pytorch package -
+numpy package
+
+    \hypertarget{questions}{%
+\subsection{Questions}\label{questions}}
+
+\textbf{(2 points) Consider a given sentence ``I am interested in NLP.''
+If the window size is 1 (i.e., consider only the word to the left and to
+the right of the current word), what will be the context and target
+pairs in a CBOW model? What will be the pairs in a Skip-gram model?}
+(Images were taken from Mikolov's
+\href{https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf}{paper})
+
+    
+
+    \textbf{Write your answer here}
+
+CBOW: context: I am in NLP, target: interested
+
+Skip-gram: context: interested, target: I am in NLP
+
+    \hypertarget{tasks}{%
+\subsection{Tasks}\label{tasks}}
+
+\hypertarget{preprocess-the-dataset}{%
+\subsubsection{1. Preprocess the dataset}\label{preprocess-the-dataset}}
+
+We will train our own word embedding on text8 dataset, the dataset
+contains \textbf{a single line of text}. Do not remove any characters
+from the data as it is very clean. We need to load and split the text
+into a sequence of words, then divide the words into batches to speed up
+training, each batch contains 100 words, please keep the orders of the
+words.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}Set the paths of the text dataset}
+        \PY{k+kn}{from} \PY{n+nn}{nltk} \PY{k}{import} \PY{n}{word\PYZus{}tokenize}
+        \PY{n}{text\PYZus{}path} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/text8}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \textbf{(2 points) Complete the code of \emph{read\_tokenize\_text},
+which read a text file and tokenize it to words.} For example, a text
+``I like NLP'' can be tokenized as ``I'', ``like'', ``NLP''. You can use
+either Python build-in function or tools like NLTK package.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}Read the text into memory, tokenize the text into words}
+        \PY{k}{def} \PY{n+nf}{read\PYZus{}tokenize\PYZus{}text}\PY{p}{(}\PY{n}{file\PYZus{}path}\PY{p}{)}\PY{p}{:}  
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{        file\PYZus{}path: the path of a text file, string}
+        \PY{l+s+sd}{    Return:}
+        \PY{l+s+sd}{        A sequence of words, Python list}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{c+c1}{\PYZsh{}to be completed}
+            \PY{n}{tokens} \PY{o}{=} \PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{n}{file\PYZus{}path}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{tokens}
+\end{Verbatim}
+
+
+    \textbf{(2 points) Complete the code of \emph{create\_word\_batch}, to
+divide a long sequence of words into batches of words.} For example, the
+word sequence {[}``I'', ``like'', ``NLP'', ``So'', ``does'', ``he''{]}
+can be divided into two batches, {[}``I'', ``like'', ``NLP''{]},
+{[}``So'', ``does'', ``he''{]}. It is more efficient to train word
+embedding on batches of word sequences rather than on a long sequence.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}Split the words into batches, each batch contains 100 words}
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}word\PYZus{}batch}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{        words: a sequence of words, list}
+        \PY{l+s+sd}{        batch\PYZus{}size: the number of words in a batch, integer}
+        \PY{l+s+sd}{    Return:}
+        \PY{l+s+sd}{        batches of words, list}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{c+c1}{\PYZsh{}to be completed}
+            \PY{n}{opt} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{opt}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{l+m+mi}{100}\PY{o}{*}\PY{n}{i} \PY{p}{:} \PY{l+m+mi}{100}\PY{o}{*}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                
+            \PY{n}{opt}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{l+m+mi}{100}\PY{o}{*}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{100}\PY{p}{)} \PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{opt}
+\end{Verbatim}
+
+
+    Now we can use the functions above to read the text8 data, and create
+word batches.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{words} \PY{o}{=} \PY{n}{read\PYZus{}tokenize\PYZus{}text}\PY{p}{(}\PY{n}{text\PYZus{}path}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total number of words:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total number of words: 17007698
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{batch\PYZus{}words} \PY{o}{=} \PY{n}{create\PYZus{}word\PYZus{}batch}\PY{p}{(}\PY{n}{words}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{batch\PYZus{}words}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['anarchism', 'originated', 'as', 'a', 'term', 'of', 'abuse', 'first', 'used', 'against', 'early', 'working', 'class', 'radicals', 'including', 'the', 'diggers', 'of', 'the', 'english', 'revolution', 'and', 'the', 'sans', 'culottes', 'of', 'the', 'french', 'revolution', 'whilst', 'the', 'term', 'is', 'still', 'used', 'in', 'a', 'pejorative', 'way', 'to', 'describe', 'any', 'act', 'that', 'used', 'violent', 'means', 'to', 'destroy', 'the', 'organization', 'of', 'society', 'it', 'has', 'also', 'been', 'taken', 'up', 'as', 'a', 'positive', 'label', 'by', 'self', 'defined', 'anarchists', 'the', 'word', 'anarchism', 'is', 'derived', 'from', 'the', 'greek', 'without', 'archons', 'ruler', 'chief', 'king', 'anarchism', 'as', 'a', 'political', 'philosophy', 'is', 'the', 'belief', 'that', 'rulers', 'are', 'unnecessary', 'and', 'should', 'be', 'abolished', 'although', 'there', 'are', 'differing']
+
+    \end{Verbatim}
+
+    \hypertarget{train-our-own-word-embeddings}{%
+\subsubsection{2. Train our own word
+embeddings}\label{train-our-own-word-embeddings}}
+
+Instead of implementing a Word2vec model from scratch, we can use Python
+packages to achieve so by simply specifying inputs, hyperparameters in a
+package.
+
+In this exercise, we'll call
+\href{https://radimrehurek.com/gensim/models/word2vec.html}{gensim}
+package to train word embeddings on \emph{batch\_words} sequences
+created above. If you are not familiar with gensim Word2Vec api, you can
+run ``help(Word2Vec)'' command in the cell or refer to the tutorial in
+the official website.
+
+Set the embedding size as 100, minimum count as 2, and select skip-gram
+approach. It may take minutes to complete the training. Set the other
+hyperparameters as default values or you can tune them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{from} \PY{n+nn}{gensim}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Word2Vec}
+        \PY{k+kn}{from} \PY{n+nn}{time} \PY{k}{import} \PY{n}{time}
+        \PY{c+c1}{\PYZsh{}help(Word2Vec)}
+\end{Verbatim}
+
+
+    \textbf{(2 points) Complete the code using gensim to train word
+embeddings.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}Use Word2Vec api to train word embedding}
+        \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}to be completed\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} }
+        \PY{n}{model} \PY{o}{=} \PY{n}{Word2Vec}\PY{p}{(}\PY{n}{batch\PYZus{}words}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{min\PYZus{}count}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sg}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} model.build\PYZus{}vocab(batch\PYZus{}words, progress\PYZus{}per=10000)}
+        \PY{c+c1}{\PYZsh{} model.train(batch\PYZus{}words, total\PYZus{}examples=w2v\PYZus{}model.corpus\PYZus{}count, epochs=30, report\PYZus{}delay=1)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{n}{end} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Word embedding trained successfully}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Timing:.}\PY{l+s+si}{\PYZob{}:0.2f\PYZcb{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{end}\PY{o}{\PYZhy{}}\PY{n}{start}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Word embedding trained successfully
+Timing:.193.07s
+
+    \end{Verbatim}
+
+    Let's take a look at the embedding for the word ``car''.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} array([ 0.5039185 , -0.18125734, -0.08366175,  0.20522477, -0.06225436,
+               -0.46933794, -0.20487791,  0.25659642,  0.12608603,  0.210749  ,
+                0.1346503 ,  0.38227138,  0.557933  ,  0.61035377,  0.36903217,
+                0.01895885,  0.4782144 , -0.03074992, -0.12192723,  0.25209543,
+                0.49046656,  0.51753783,  0.08154622,  0.34534645,  0.29811475,
+                0.54382974,  0.09979406, -0.17426154,  0.08065145, -0.15686497,
+                0.68818283,  0.2272209 ,  0.15110658,  0.13998547, -0.2441049 ,
+                0.06013947, -0.5392965 , -0.27744538, -0.41850895, -0.06790947,
+                0.838845  , -0.1562949 ,  0.35809094, -0.40472966,  0.23348644,
+                0.2588304 ,  0.01338897, -0.37880674, -0.12165417, -0.19353639,
+               -0.1869204 , -0.07811775,  0.4021772 , -0.82939667, -0.04869866,
+                0.22925554, -0.13923384, -0.32024905,  0.3611515 ,  0.5319167 ,
+               -0.0613929 ,  0.3461304 , -0.11178476, -0.17323735, -0.1704366 ,
+                0.15956782,  0.59770614,  0.00326212, -0.6099037 ,  0.39292073,
+               -0.25266856,  0.08996017,  0.15409578, -0.5244407 ,  0.66310066,
+               -0.04677894, -0.53673637,  0.12472791, -0.37800136,  0.25216845,
+                0.36743012,  0.19467957,  0.25480238, -0.56000435, -0.30065203,
+               -0.656934  , -0.41552043,  0.01082972,  0.18568423, -0.6136125 ,
+               -0.24729572,  0.3966443 , -0.04334569,  0.39295173, -0.06768172,
+               -0.53522396, -0.26422644,  0.4665862 ,  0.42036656,  0.39582548],
+              dtype=float32)
+\end{Verbatim}
+            
+    \hypertarget{visualize-the-embeddings}{%
+\subsubsection{3. Visualize the
+embeddings}\label{visualize-the-embeddings}}
+
+Visualization is often employed in analyzing word embedding. However,
+word embedding dimension is usually far larger than two, and it is not
+easy to visualize data that has more than 3 dimensions. We need to
+transform our word embeddings to 2-dimensional data before doing
+visualization.
+
+\href{https://en.wikipedia.org/wiki/Principal_component_analysis}{Principal
+component analysis} (PCA) is a statistical procedure that uses an
+orthogonal transformation to convert a set of observations of possibly
+correlated variables (entities each of which takes on various numerical
+values) into a set of values of linearly uncorrelated variables called
+principal components. PCA can be used to reduce dimension by selecting
+several principal components.
+
+In this exercise, we will use PCA to map the 100-dimensional word
+embeddings to 2-dimensional points.
+
+    Let's display the size of vocabulary:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{o}{.}\PY{n}{vocab}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 135330
+\end{Verbatim}
+            
+    then select first 300 words from the vocabulary in the model trained
+above.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{vocab\PYZus{}words} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{o}{.}\PY{n}{vocab}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{select\PYZus{}300\PYZus{}words} \PY{o}{=} \PY{n}{vocab\PYZus{}words}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{300}\PY{p}{]}
+\end{Verbatim}
+
+
+    \textbf{(2 points) Complete the code to find the embedding of each word
+in select\_300\_words, and stack them into a numpy ndarray}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}to be completed}
+         \PY{c+c1}{\PYZsh{}shape of vectors should be 300*100}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{n}{vectors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{300}\PY{p}{)}\PY{p}{:}
+             \PY{n}{vectors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{vectors}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{p}{[}\PY{n}{select\PYZus{}300\PYZus{}words}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{vectors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{vectors}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} vectors.shape}
+\end{Verbatim}
+
+
+    \textbf{(4 points) Complete PCA algorithm using Python numpy package
+from scratch.} PCA can be regarded as eigenvalue decomposition. Let's
+denote word embedding vectors as \(X \in R^{n \times d}\), \(n\) is word
+number, \(d\) is embedding dimension. We will follow procedures
+described below and implement our PCA algorithm: - Compute the mean
+vector \(\overline X\) of the embedding vectors X. - Normalize embedding
+vectors by subtracting mean vector for each word embedding \(X_i\).
+\[X_{i}=X_i-\overline X\] - Compute the covariance matrix of normalized
+\(X\) \[C = \frac {X^TX}{n-1}\] - Do eigen decomposition of the
+covariance matrix \(C\) using numpy and get eigenvectors \(W\)(principal
+components). - Transform the normalized matrix \(X\), and select first
+kth columns as projection. \[\hat X = XW\] \[X_{proj} = \hat X_{1:k}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}please use Python built\PYZhy{}in function and numpy}
+         \PY{k}{def} \PY{n+nf}{pca}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    PCA algorithms}
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        X: input matrix}
+         \PY{l+s+sd}{        k: number of principal components}
+         \PY{l+s+sd}{    Return:}
+         \PY{l+s+sd}{        the projections on the first k principal components}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}to be completed\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Normalize}
+             \PY{n}{X\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{vectors}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             \PY{n}{X\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{X\PYZus{}}\PY{p}{,} \PY{l+m+mi}{300}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{X} \PY{o}{=} \PY{n}{X} \PY{o}{\PYZhy{}} \PY{n}{X\PYZus{}}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Covariance matrix}
+             \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{299}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Eigen decomposition}
+             \PY{n}{eigen\PYZus{}val}\PY{p}{,} \PY{n}{eigen\PYZus{}vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eig}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+             
+             \PY{n}{X\PYZus{}pca} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{eigen\PYZus{}vec}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{k}{return} \PY{n}{X\PYZus{}pca}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{k}\PY{p}{]}
+\end{Verbatim}
+
+
+    Now we can project the 100-dimension word vectors to 2-dimension points.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{two\PYZus{}d\PYZus{}embeddings} \PY{o}{=} \PY{n}{pca}\PY{p}{(}\PY{n}{vectors}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's check the projection of word embeddings on a 2-D plot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}Visualize the transformed word embeddings and annotate them with words.}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k}{def} \PY{n+nf}{plot}\PY{p}{(}\PY{n}{embeddings}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+           \PY{k}{assert} \PY{n}{embeddings}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{More labels than embeddings}\PY{l+s+s1}{\PYZsq{}}
+           \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} in inches}
+           \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{label} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{embeddings}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n}{label}\PY{p}{,} \PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{textcoords}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{offset points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                            \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{va}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{two\PYZus{}d\PYZus{}embeddings}\PY{p}{,} \PY{n}{select\PYZus{}300\PYZus{}words}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{(2 points) Describe patterns in the visualization, are there any
+clusters of similar words? If there aren't any patterns, analyse the
+problem and re-train the word embeddings.}
+
+    Similar words are close to each other. For example, (communism,
+anarchists,anarchism), (believing, believe), (zero, one, three, six,
+seven)
+
+    \hypertarget{intrinsic-evaluation}{%
+\subsubsection{4. Intrinsic Evaluation}\label{intrinsic-evaluation}}
+
+\textbf{(2 points) Based on the embeddings we have trained, find most
+similar 5 words for each of the words {[}cat, dog, eat{]} and their
+similarities}, check whether the results match our tuition or not. You
+can use gensim functions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}to be completed}
+         \PY{n}{cats} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{o}{.}\PY{n}{most\PYZus{}similar}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{topn}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{dogs} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{o}{.}\PY{n}{most\PYZus{}similar}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{topn}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{eats} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{o}{.}\PY{n}{most\PYZus{}similar}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eats}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{topn}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{cats}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{word for cat is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cats}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Similarity:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cats}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{word for dog is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dogs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Similarity:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dogs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{word for eat is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{eats}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Similarity:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{eats}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The top 1 word for cat is albino Similarity: 0.700672447681427
+The top 1 word for dog is keeshond Similarity: 0.7452787160873413
+The top 1 word for eat is ate Similarity: 0.8192439079284668
+The top 2 word for cat is bird Similarity: 0.6862938404083252
+The top 2 word for dog is dogs Similarity: 0.740047037601471
+The top 2 word for eat is heifer Similarity: 0.8061779737472534
+The top 3 word for cat is squirrel Similarity: 0.6783856153488159
+The top 3 word for dog is hound Similarity: 0.7388863563537598
+The top 3 word for eat is uttering Similarity: 0.8047555685043335
+The top 4 word for cat is pig Similarity: 0.6690456867218018
+The top 4 word for dog is pig Similarity: 0.7370461225509644
+The top 4 word for eat is puppy Similarity: 0.7997769117355347
+The top 5 word for cat is rodent Similarity: 0.668287992477417
+The top 5 word for dog is breed Similarity: 0.7234786748886108
+The top 5 word for eat is devour Similarity: 0.7944192886352539
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/lixingxuan/anaconda3/envs/tesnorflow/lib/python3.6/site-packages/gensim/matutils.py:737: FutureWarning: Conversion of the second argument of issubdtype from `int` to `np.signedinteger` is deprecated. In future, it will be treated as `np.int64 == np.dtype(int).type`.
+  if np.issubdtype(vec.dtype, np.int):
+
+    \end{Verbatim}
+
+    A popular choice for intrinsic evaluation of word vectors is to explore
+the performance in completing word vector analogies, assume there are
+two word pairs, a:b, c:d, ideally, their embeddings satisfy a rule
+\(x_a-x_b = x_c-x_d\). For instance, queen -- king = actress -- actor.
+
+\textbf{(2 points) Now find out which word will it be in woman - king =
+man - ?} You can use gensim package.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}to be completed}
+         \PY{n}{q4\PYZus{}2} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{o}{.}\PY{n}{most\PYZus{}similar}\PY{p}{(}\PY{n}{positive}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{king}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{man}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{negative}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{man}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} q4\PYZus{}2}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The word is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{q4\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The word is prince
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/lixingxuan/anaconda3/envs/tesnorflow/lib/python3.6/site-packages/gensim/matutils.py:737: FutureWarning: Conversion of the second argument of issubdtype from `int` to `np.signedinteger` is deprecated. In future, it will be treated as `np.int64 == np.dtype(int).type`.
+  if np.issubdtype(vec.dtype, np.int):
+
+    \end{Verbatim}
+
+    \hypertarget{extrinsic-evaluation}{%
+\subsubsection{5. Extrinsic Evaluation}\label{extrinsic-evaluation}}
+
+Apart from intrinsic evaluation, the quality of word embeddings can also
+be evaluated by downstream tasks such as sentiment analysis, which aims
+to detect the sentiment polarity of a sentence. For instance, the
+sentence ``I like the movie very much'' is positive, whereas ``I was
+very disappointed with my new phone'' is negative.
+
+In sentiment analysis, each sentence can be tokenized as a sequence of
+words, then map each word to its embedding, next feed the sequence of
+word embedding to a GRU layer and obtain the final output of the GRU as
+the sentence vector. With the sentence vectors and labels, we can train
+a classifier.
+
+We will implement a sentiment analysis pipeline step by step on
+\href{https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/data}{movie
+reviews} from the Rotten Tomatoes.
+
+    \hypertarget{load-the-sentiment-dataset}{%
+\paragraph{5.1 Load the sentiment
+dataset}\label{load-the-sentiment-dataset}}
+
+The dataset consists of training and testing parts, they have been
+preprocessed and saved in *.csv format. The data only has two sentiment
+labels, positive and negative.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{torch}
+         \PY{k+kn}{from} \PY{n+nn}{torch} \PY{k}{import} \PY{n}{nn}
+         \PY{k+kn}{from} \PY{n+nn}{dynamic\PYZus{}rnn} \PY{k}{import} \PY{n}{dynamicRNN}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{train\PYZus{}data\PYZus{}split} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/train\PYZus{}data\PYZus{}processed.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}data\PYZus{}split} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/test\PYZus{}data\PYZus{}processed.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{train\PYZus{}data\PYZus{}split}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}    PhraseId  SentenceId                                             Phrase  \textbackslash{}
+         0     44878        2177  of a pregnant premise being wasted by a script{\ldots}   
+         1     65677        3329  All comedy is subversive , but this unrelentin{\ldots}   
+         2    102694        5410  dwells on crossing-over mumbo jumbo , manipula{\ldots}   
+         3      4154         156  the kind of lush , all-enveloping movie experi{\ldots}   
+         4    147293        8015  It 's a fine , focused piece of work that reop{\ldots}   
+         
+            Sentiment  length  
+         0          0      24  
+         1          0      26  
+         2          0      13  
+         3          1       8  
+         4          1      20  
+\end{Verbatim}
+            
+    \hypertarget{transform-texts-into-sequences-of-embedding}{%
+\paragraph{5.2 Transform texts into sequences of
+embedding}\label{transform-texts-into-sequences-of-embedding}}
+
+We need to tokenize each sentence into a sequence of words first, then
+map them to a sequence of word embeddings. As the lengths of sentences
+vary, it is necessary to pad all the sentences to the same length in
+order to stack them in a tensor.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}initialize unknown word embedding}
+         \PY{n}{unk\PYZus{}emb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.01}\PY{o}{\PYZhy{}} \PY{l+m+mf}{0.005}
+         \PY{n}{max\PYZus{}text\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{52}
+         
+         \PY{k}{def} \PY{n+nf}{word2emb}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Map each word to a vector}
+         \PY{l+s+sd}{    Unknown word will be assigned a random value}
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        w: a word, string}
+         \PY{l+s+sd}{    return:}
+         \PY{l+s+sd}{        embedding of the given word}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{emb} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{wv}\PY{p}{[}\PY{n}{w}\PY{p}{]}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{n}{emb} \PY{o}{=} \PY{n}{unk\PYZus{}emb} 
+             \PY{k}{return} \PY{n}{emb}
+\end{Verbatim}
+
+
+    \textbf{(2 points) Complete the function \emph{text2seq} below, we need
+a function to tokenize a sentence into a sequence of words.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{text2seq}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Split a text into a sequence of words}
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        text: a string of text}
+         \PY{l+s+sd}{    Return:}
+         \PY{l+s+sd}{        a list of words}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{c+c1}{\PYZsh{}to be completed}
+             \PY{n}{words} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{words}
+\end{Verbatim}
+
+
+    \textbf{(2 points) Complete the function \emph{seq2emb}, to map a
+sequence of words to a sequence of word embeddings}, remember to pad
+each sequence to the same length and return a numpy array.
+
+For example, the lengths of the two sentences ``I like NLP'', ``It is a
+nice car'' are different, we can paddle the first one as ``I like NLP
+\(" by adding a special token "\)'' in the end. In the function seq2emb,
+you can just set the embeddings of the padded tokens as 0s.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{def} \PY{n+nf}{seq2emb}\PY{p}{(}\PY{n}{tokens}\PY{p}{,} \PY{n}{max\PYZus{}pad\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{52}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Map a sequence of words to a sequence of embedding}
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        tokens: a list of words, lengths may be varied}
+         \PY{l+s+sd}{        max\PYZus{}pad\PYZus{}length: the padding length, integer}
+         \PY{l+s+sd}{    Return:}
+         \PY{l+s+sd}{        a numpy.ndarray object, shape is max\PYZus{}pad\PYZus{}length*embedding\PYZus{}dim}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{c+c1}{\PYZsh{}to be completed }
+             \PY{n}{opt} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tokens}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{opt} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{opt}\PY{p}{,} \PY{n}{word2emb}\PY{p}{(}\PY{n}{tokens}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{tokens}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{max\PYZus{}pad\PYZus{}length}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{max\PYZus{}pad\PYZus{}length} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{tokens}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{opt} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{opt}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{opt} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{opt}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}     print(opt.shape)}
+             \PY{k}{return} \PY{n}{opt}                          
+\end{Verbatim}
+
+
+    Let's check whether our code works:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{tokens} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{An}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{awesome}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{car}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{example\PYZus{}seq\PYZus{}emb} \PY{o}{=} \PY{n}{seq2emb}\PY{p}{(}\PY{n}{tokens}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{example\PYZus{}seq\PYZus{}emb}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{l+m+mi}{52}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    We can also create a function \emph{text2emb}, to transform a batch of
+sentences to padded sequences of embeddings.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{def} \PY{n+nf}{text2emb}\PY{p}{(}\PY{n}{texts}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Transform texts into sequences of embedding}
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        texts: a list of sentences}
+         \PY{l+s+sd}{    Return:}
+         \PY{l+s+sd}{        sentence representations, sentence lengths}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{text\PYZus{}seqs} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n}{text2seq}\PY{p}{,} \PY{n}{texts}\PY{p}{)}\PY{p}{)}
+             \PY{n}{text\PYZus{}lens} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{seq}\PY{p}{)} \PY{k}{for} \PY{n}{seq} \PY{o+ow}{in} \PY{n}{text\PYZus{}seqs}\PY{p}{]}\PY{p}{)}
+             \PY{n}{text\PYZus{}seq\PYZus{}embs} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n}{seq2emb}\PY{p}{,} \PY{n}{text\PYZus{}seqs}\PY{p}{)}\PY{p}{)}\PY{c+c1}{\PYZsh{}a list of tokens}
+             \PY{n}{text\PYZus{}seq\PYZus{}embs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{n}{text\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{k}{return} \PY{n}{text\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{text\PYZus{}lens}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{texts} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{This is an awesome car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{I like NLP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{example\PYZus{}text\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{example\PYZus{}text\PYZus{}lens} \PY{o}{=} \PY{n}{text2emb}\PY{p}{(}\PY{n}{texts}\PY{p}{)}
+         
+         \PY{k}{assert} \PY{n}{example\PYZus{}text\PYZus{}seq\PYZus{}embs}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{52}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{example\PYZus{}text\PYZus{}lens}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{gru-based-classifier}{%
+\paragraph{5.3 GRU-based Classifier}\label{gru-based-classifier}}
+
+Recurrent neural networks(RNN) have been explored in many NLP tasks, and
+proved to be efficient in capturing context dependencies.
+\href{https://en.wikipedia.org/wiki/Gated_recurrent_unit}{Gated
+Recurrent Unit}(GRU)is a variant of Recurrent Neural Network(RNN). The
+GRU is similar to a long short-term memory (LSTM) with forget gate but
+has fewer parameters as it lacks an output gate. The formula and
+architecture are shown below(taken from Wikipedia):
+\includegraphics{https://wikimedia.org/api/rest_v1/media/math/render/svg/d191eafc26594b0d9754f3221ca8a94852588f7c}
+\includegraphics{https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Gated_Recurrent_Unit\%2C_base_type.svg/220px-Gated_Recurrent_Unit\%2C_base_type.svg.png}
+
+    \(x_t\) is the current input, \(h_{t-1}\) is the last hidden output of
+GRU, \(h_t\) is current hidden output of GRU. \(z_t\) is the forget gate
+and \(r_t\) is the reset gate, \(W_z\), \(W_r\), \(U_z\), \(U_r\) are
+parameters, \(b_z\), \(b_r\) are biases.
+
+We have provided a dynamic GRU class to handle varying-length sentences.
+Note, for this part, we need to use Pytorch package, if you are not
+familiar with Pytorch, you can refer to
+\href{https://pytorch.org/tutorials/}{tutorials}.
+
+    Each sentence can be transformed into a vector using an RNN layer, and
+we can handle a batch of sentences each time in our dynamic GRU class.
+Let's check our dynamic GRU class with examples created above.
+\textbf{Note, we need to feed both word embedding tensors of sentences
+and the actual lengths of sentences to dynamic GRU class.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{embed\PYZus{}dim}\PY{p}{,} \PY{n}{hidden\PYZus{}dim} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{16}
+         \PY{c+c1}{\PYZsh{}Create a dynamic RNN object}
+         \PY{n}{dynRNN} \PY{o}{=} \PY{n}{dynamicRNN}\PY{p}{(}\PY{n}{embed\PYZus{}dim}\PY{p}{,} \PY{n}{hidden\PYZus{}dim}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}You need to transform numpy arrays to pytorch tensors, for integers, you need to use LongTensor type}
+         \PY{n}{example\PYZus{}text\PYZus{}seq\PYZus{}embs} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{FloatTensor}\PY{p}{(}\PY{n}{example\PYZus{}text\PYZus{}seq\PYZus{}embs}\PY{p}{)}
+         \PY{n}{example\PYZus{}text\PYZus{}lens} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{LongTensor}\PY{p}{(}\PY{n}{example\PYZus{}text\PYZus{}lens}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Obtain the sentence representations}
+         \PY{n}{sent\PYZus{}reps} \PY{o}{=} \PY{n}{dynRNN}\PY{p}{(}\PY{n}{example\PYZus{}text\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{example\PYZus{}text\PYZus{}lens}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sent\PYZus{}reps}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+torch.Size([2, 16])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{sent\PYZus{}reps}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+tensor([[-0.4006, -0.3346, -0.2978,  0.2569, -0.3909, -0.3360,  0.4584, -0.0467,
+         -0.0038,  0.0123, -0.2405, -0.0988, -0.2080, -0.0843, -0.0837, -0.0855],
+        [-0.0714,  0.2155,  0.1031, -0.0660, -0.1107,  0.0352,  0.0332,  0.0234,
+         -0.1600, -0.0190, -0.2414,  0.1709, -0.0427,  0.0275, -0.1149, -0.1557]],
+       grad\_fn=<TakeBackward>)
+
+    \end{Verbatim}
+
+    \textbf{(4 points) Complete the forward function of RNNClassifier},
+which input a tensor representing a batch of sentences as well as a
+tensor recording the actual lengths of sentences.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k}{class} \PY{n+nc}{RNNClassifier}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Transform sentence representations to sentiment label expression}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{embed\PYZus{}dim}\PY{p}{,} \PY{n}{hidden\PYZus{}dim}\PY{p}{,} \PY{n}{output\PYZus{}dim}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Args:}
+         \PY{l+s+sd}{            embed\PYZus{}dim: embedding dimension, integer}
+         \PY{l+s+sd}{            hidden\PYZus{}dim: GRU hidden layer dimension, integer}
+         \PY{l+s+sd}{            output\PYZus{}dim: output dimension(label size), integer}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{RNNClassifier}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dynRNN} \PY{o}{=} \PY{n}{dynamicRNN}\PY{p}{(}\PY{n}{embed\PYZus{}dim}\PY{p}{,} \PY{n}{hidden\PYZus{}dim}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{linear} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{n}{hidden\PYZus{}dim}\PY{p}{,} \PY{n}{output\PYZus{}dim}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{log\PYZus{}softmax} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{LogSoftmax}\PY{p}{(}\PY{n}{dim}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              
+             \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{text\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{text\PYZus{}seq\PYZus{}lens}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{        Args:}
+         \PY{l+s+sd}{            text\PYZus{}seq\PYZus{}embs: batch sequences of word embedding, batch\PYZus{}size*sequence\PYZus{}length*embedding\PYZus{}dim}
+         \PY{l+s+sd}{            text\PYZus{}seq\PYZus{}lens: actual lengths of each batch sequence, batch\PYZus{}size}
+         \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}to be completed\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+                 \PY{c+c1}{\PYZsh{}1. Obtain the final hidden states for each sentences using dynamicRNN}
+                 \PY{n}{lstm\PYZus{}opt} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dynRNN}\PY{p}{(}\PY{n}{text\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{text\PYZus{}seq\PYZus{}lens}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}2. Use dropout on the sentence representations}
+                 \PY{n}{drop\PYZus{}opt} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{lstm\PYZus{}opt}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}3. Feed the sentence vectors to a fully\PYZhy{}connected layer}
+                 \PY{n}{fc\PYZus{}opt} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{linear}\PY{p}{(}\PY{n}{drop\PYZus{}opt}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}4. Get and return the log softmax values of the output}
+                 \PY{n}{opt} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{log\PYZus{}softmax}\PY{p}{(}\PY{n}{fc\PYZus{}opt}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{opt}
+\end{Verbatim}
+
+
+    Simply check our classifier:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{torch}\PY{o}{.}\PY{n}{manual\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{classifier} \PY{o}{=} \PY{n}{RNNClassifier}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}
+         \PY{n}{pred\PYZus{}scores} \PY{o}{=} \PY{n}{classifier}\PY{p}{(}\PY{n}{example\PYZus{}text\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{example\PYZus{}text\PYZus{}lens}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{pred\PYZus{}scores}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    With the functions define above, you can transform the sentences in the
+dataset into sequences of embedding.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}Process the training and testing sentences, obtain the padded sequences of embeddings and actual sentence lengths}
+         \PY{n}{train\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{train\PYZus{}lens} \PY{o}{=} \PY{n}{text2emb}\PY{p}{(}\PY{n}{train\PYZus{}data\PYZus{}split}\PY{o}{.}\PY{n}{Phrase}\PY{p}{)}
+         \PY{n}{test\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{test\PYZus{}lens} \PY{o}{=} \PY{n}{text2emb}\PY{p}{(}\PY{n}{test\PYZus{}data\PYZus{}split}\PY{o}{.}\PY{n}{Phrase}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{train\PYZus{}labels} \PY{o}{=} \PY{n}{train\PYZus{}data\PYZus{}split}\PY{o}{.}\PY{n}{Sentiment}\PY{o}{.}\PY{n}{values}
+         \PY{n}{test\PYZus{}labels} \PY{o}{=} \PY{n}{test\PYZus{}data\PYZus{}split}\PY{o}{.}\PY{n}{Sentiment}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    In order to train the parameters, optimization method and loss should be
+specified. Let's use Adam optimizer.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{optimizer} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{classifier}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)}
+         \PY{n}{loss\PYZus{}func} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{NLLLoss}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{(2 point) Complete the code of training}. Note, we need to keep
+records of the average cost for each 40 loops for visualization. You can
+refer to a pytorch neural network
+\href{https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html\#sphx-glr-beginner-blitz-neural-networks-tutorial-py}{pipeline}.
+It is sufficient to run this code using CPU only.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{loops} \PY{o}{=} \PY{l+m+mi}{200}
+         \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{64}
+         \PY{n}{costs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{classifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+             \PY{n}{cost} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{loops}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{classifier}\PY{o}{.}\PY{n}{zero\PYZus{}grad}\PY{p}{(}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}Select a batch of training data}
+                 \PY{n}{batch\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}seq\PYZus{}embs}\PY{p}{)}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}
+                 \PY{n}{batch\PYZus{}text\PYZus{}reps}\PY{p}{,} \PY{n}{batch\PYZus{}lens} \PY{o}{=} \PY{n}{train\PYZus{}seq\PYZus{}embs}\PY{p}{[}\PY{n}{batch\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}lens}\PY{p}{[}\PY{n}{batch\PYZus{}index}\PY{p}{]}
+                 \PY{n}{batch\PYZus{}labels} \PY{o}{=} \PY{n}{train\PYZus{}labels}\PY{p}{[}\PY{n}{batch\PYZus{}index}\PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{}transform the numpy array to pytorch tensor}
+                 \PY{n}{batch\PYZus{}text\PYZus{}reps} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{FloatTensor}\PY{p}{(}\PY{n}{batch\PYZus{}text\PYZus{}reps}\PY{p}{)}
+                 \PY{n}{batch\PYZus{}lens} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{LongTensor}\PY{p}{(}\PY{n}{batch\PYZus{}lens}\PY{p}{)}
+                 \PY{n}{batch\PYZus{}labels} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{LongTensor}\PY{p}{(}\PY{n}{batch\PYZus{}labels}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}to be completed\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+                 \PY{c+c1}{\PYZsh{}compute the probability of output labels using your classifier}
+                 \PY{n}{pred\PYZus{}probs} \PY{o}{=} \PY{n}{classifier}\PY{p}{(}\PY{n}{batch\PYZus{}text\PYZus{}reps}\PY{p}{,} \PY{n}{batch\PYZus{}lens}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}compute loss}
+                 \PY{n}{loss} \PY{o}{=} \PY{n}{loss\PYZus{}func}\PY{p}{(}\PY{n}{pred\PYZus{}probs}\PY{p}{,} \PY{n}{batch\PYZus{}labels}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}backpropagate the gradient and update the weights using loss\PYZus{}func and optimizer}
+                 \PY{n}{loss}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{optimizer}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{cost} \PY{o}{+}\PY{o}{=} \PY{n}{loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{j} \PY{o}{\PYZpc{}} \PY{l+m+mi}{40} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{j}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{n}{costs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cost}\PY{o}{/}\PY{l+m+mi}{40}\PY{p}{)}
+                     \PY{n}{cost} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Loss }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{loss}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training Loss 0.73
+Training Loss 0.70
+Training Loss 0.53
+Training Loss 0.70
+Training Loss 0.56
+Training Loss 0.47
+Training Loss 0.43
+Training Loss 0.45
+Training Loss 0.51
+Training Loss 0.49
+Training Loss 0.50
+Training Loss 0.50
+Training Loss 0.32
+Training Loss 0.44
+Training Loss 0.49
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{costs}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{costs}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Loss of RNN Classifier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} Text(0,0.5,'Loss')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_73_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Finally, we can evaluate our classifier on the testing dataset with
+respect to accuracy. \textbf{We can fine tune the hyperparameters like
+epochs, learning rate, hidden size etc. to improve the performance.} The
+final accuracy should be above 0.8.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{classifier}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}
+         \PY{n}{test\PYZus{}seq\PYZus{}embs} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{FloatTensor}\PY{p}{(}\PY{n}{test\PYZus{}seq\PYZus{}embs}\PY{p}{)}
+         \PY{n}{test\PYZus{}lens} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{LongTensor}\PY{p}{(}\PY{n}{test\PYZus{}lens}\PY{p}{)}
+         \PY{n}{pred\PYZus{}probs} \PY{o}{=} \PY{n}{classifier}\PY{p}{(}\PY{n}{test\PYZus{}seq\PYZus{}embs}\PY{p}{,} \PY{n}{test\PYZus{}lens}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}\PY{p}{,} \PY{n}{accuracy\PYZus{}score}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{pred\PYZus{}labels} \PY{o}{=} \PY{n}{pred\PYZus{}probs}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{test\PYZus{}labels}\PY{p}{,} \PY{n}{pred\PYZus{}labels}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Testing Accuracy: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Testing Accuracy: 0.83
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{test\PYZus{}labels}\PY{p}{,} \PY{n}{pred\PYZus{}labels}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} array([[373,  62],
+                [109, 456]])
+\end{Verbatim}
+            
+    Congratulations! We have implemented a sentiment analysis pipeline
+successfully!
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

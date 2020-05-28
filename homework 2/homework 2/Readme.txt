@@ -1,0 +1,1 @@
+Please follow the instructions in "homework 2.ipynb" file, complete the code and answers. Submit the file on eDimension before the due date.
